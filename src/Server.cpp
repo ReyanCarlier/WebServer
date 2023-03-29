@@ -46,6 +46,7 @@ void Server::bind(int port) {
 	_address.sin_family = AF_INET;
 	_address.sin_addr.s_addr = INADDR_ANY;
 	_address.sin_port = htons(port);
+	_port = port;
 
 	if (::bind(_socket_fd, (struct sockaddr *)&_address, sizeof(_address)) < 0)
 		throw "Failed to bind socket.";

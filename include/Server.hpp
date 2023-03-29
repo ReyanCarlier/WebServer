@@ -1,9 +1,8 @@
-#pragma once
-
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <cstdlib> // For exit() and EXIT_FAILURE
 
 /**
  * @brief Server class for the web server. Contains all the information about the server.

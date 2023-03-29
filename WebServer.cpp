@@ -1,31 +1,27 @@
 #include "Server.hpp"
-
-#include <netinet/in.h> // For sockaddr_in
-#include <cstdlib> // For exit() and EXIT_FAILURE
-#include <iostream> // For cout
-#include <unistd.h> // For read
+#include "Color.hpp"
 
 int main(int argc, char **argv)
 {
 	if (argc != 2) {
-		std::cout << "Usage: ./server <port>" << std::endl;
+		std::cout << yellow << bold << "INFO: " << reset << cyan << "Usage: ./server <port>" << def << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
 	int port = atoi(argv[1]);
 	if (port < 1024 || port > 65535) {
-		std::cout << "Port must be between 1024 and 65535." << std::endl;
+		std::cout << red << "ERROR: " << cyan << "Port must be between 1024 and 65535." << def << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
 	Server server;
 	try {
 		server.run();
-		std::cout << "Socket created successfully." << std::endl;
+		std::cout << green << "✅ Socket created successfully." << reset << std::endl;
 		server.bind(port);
-		std::cout << "Socket binded successfully." << std::endl;
+		std::cout << green << "✅ Socket binded successfully." << reset << std::endl;
 		server.listen();
-		std::cout << "Socket listening successfully." << std::endl;
+		std::cout << green << "✅ Server listening on 127.0.0.1:" << server.getPort() << "." << reset << std::endl;
 
 		int new_socket;
 		struct sockaddr_in address;
@@ -33,13 +29,12 @@ int main(int argc, char **argv)
 		char buffer[1024] = {0};
 
 		while (true) {
+			std::cout << blink << "Waiting for new connection..." << reset << std::endl;
 			if ((new_socket = accept(server.getSocketFd(), (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0)
 				throw "Failed to accept connection.";
 			read(new_socket, buffer, 1024);
 			std::cout << buffer << std::endl;
-			std::string response = "J'ai recu ton message. \n";
-			// Currently, the server only sends a response to the client. It does not handle the request.
-			// Compatible with telnet.
+			std::string response = "HTTP/1.1 200 OK\r";
 			server.send(new_socket, response.c_str());
 			close(new_socket);
 		}

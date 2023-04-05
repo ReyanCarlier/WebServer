@@ -34,13 +34,13 @@ int main(int argc, char **argv)
 				throw "Failed to accept connection.";
 			read(new_socket, buffer, 1024);
 			std::cout << buffer << std::endl;
-			std::string response = "HTTP/1.1 200 OK\r";
+			std::string response = "HTTP/1.1 200 OK\n";
 			server.send(new_socket, response.c_str());
-			close(new_socket);
 		}
 	}
-	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+	catch (const char *e) {
+		std::cout << red << e << reset << std::endl;
+		server.clear();
 		exit(EXIT_FAILURE);
 	}
 	return 0;

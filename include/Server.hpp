@@ -30,6 +30,7 @@ class Server {
 		void listen();
 		void run();
 		void send(int socket_fd, std::string response);
+		void clear();
 
 	private:
 		sockaddr_in _address;

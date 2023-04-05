@@ -16,7 +16,7 @@ TARGET = WebServer
 CXX = c++
 
 # Flags to use :
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -g3
 
 ################################################################################
 #                                   SOURCES                                    #
@@ -24,7 +24,10 @@ CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 # Add here the name of the files you want to compile (without the extension) :
 SRCS_FILES	:=		WebServer \
-					Server
+					Server \
+					Role \
+					User \
+					Message
 
 SRCS_FILES	:= 		$(addsuffix .cpp, $(SRCS_FILES))
 

@@ -57,7 +57,15 @@ void Server::listen() {
 }
 
 void Server::send(int socket_fd, std::string response) {
-	if (::send(socket_fd, response.c_str(), response.length(), 0) < 0)
+	if (::send(socket_fd, response.c_str(), response.length(), MSG_DONTWAIT) < 0)
 		throw "Failed to send response.";
 	std::cout << "[SERVER => CLIENT("<< socket_fd << ")] " << response << std::endl;
+}
+
+void Server::clear()
+{
+	if (_socket_fd)
+		close(_socket_fd);
+	if (_address.sin_addr.s_addr)
+		delete &_address;
 }

@@ -27,7 +27,8 @@ SRCS_FILES	:=		WebServer \
 					Server \
 					Role \
 					User \
-					Message
+					Message \
+					Channel
 
 SRCS_FILES	:= 		$(addsuffix .cpp, $(SRCS_FILES))
 

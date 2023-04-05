@@ -3,6 +3,7 @@
 #include <list>
 #include "User.hpp"
 #include "Message.hpp"
+#include "Channel.hpp"
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -45,4 +46,5 @@ class Server {
 		int _max_body_size;
 		std::list<User> _users;
 		std::list<Message> _messages;
+		std::list<Channel> _channels;
 };

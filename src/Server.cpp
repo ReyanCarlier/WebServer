@@ -7,12 +7,15 @@
 Server::Server() : _socket_fd(0), _port(0), _max_connections(0), _max_body_size(0) {
 	_users = std::list<User>();
 	_messages = std::list<Message>();
+	_channels = std::list<Channel>();
 }
 
 Server::~Server() {
 	for (std::list<User>::iterator it = _users.begin(); it != _users.end(); ++it)
 		delete &(*it);
 	for (std::list<Message>::iterator it = _messages.begin(); it != _messages.end(); ++it)
+		delete &(*it);
+	for (std::list<Channel>::iterator it = _channels.begin(); it != _channels.end(); ++it)
 		delete &(*it);
 }
 
@@ -29,7 +32,6 @@ void Server::setSocketFd(int socket_fd) {
 	_socket_fd = socket_fd;
 }
 
-// Getters
 int Server::getPort() const {
 	return _port;
 }

@@ -49,6 +49,14 @@ std::string User::getEmail() const {
     return this->_email;
 }
 
+std::string User::getNickname() const {
+    return this->_nickname;
+}
+
+Role User::getRole() const {
+    return this->_role;
+}
+
 void User::setId(const int id) {
     this->_id = id;
 }
@@ -63,4 +71,12 @@ void User::setPassword(const std::string password) {
 
 void User::setEmail(const std::string email) {
     this->_email = email;
+}
+
+void User::setNickname(const std::string nickname) {
+    this->_nickname = nickname;
+}
+
+void User::setRole(const Role role) {
+    this->_role = role;
 }

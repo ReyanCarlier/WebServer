@@ -33,12 +33,20 @@ const User *Message::getTarget() const {
     return this->m_target;
 }
 
+const User Message::getSender() const {
+    return this->m_sender;
+}
+
 void Message::setMessage(const std::string message) {
     this->m_message = message;
 }
 
 void Message::setTarget(User *target) {
     this->m_target = target;
+}
+
+void Message::setSender(const User sender) {
+    this->m_sender = sender;
 }
 
 bool Message::send() {

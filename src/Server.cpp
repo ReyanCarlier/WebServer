@@ -1,14 +1,21 @@
 #include "Server.hpp"
 
+#include <sys/types.h>
+#include <list>
 #include <sys/socket.h>
 
-Server::Server() : _socket_fd(0), _port(0), _max_connections(0), _max_body_size(0)
-{
+Server::Server() : _socket_fd(0), _port(0), _max_connections(0), _max_body_size(0) {
+	_users = std::list<User>();
+	_messages = std::list<Message>();
 }
 
-Server::~Server() {}
+Server::~Server() {
+	for (std::list<User>::iterator it = _users.begin(); it != _users.end(); ++it)
+		delete &(*it);
+	for (std::list<Message>::iterator it = _messages.begin(); it != _messages.end(); ++it)
+		delete &(*it);
+}
 
-// Setters
 void Server::setPort(int port) {
 	_port = port;
 }

@@ -15,13 +15,16 @@ class Message {
 
         const std::string   getMessage() const;
         const User          *getTarget() const;
+        const User          getSender() const;
 
         void setMessage(const std::string message);
         void setTarget(User *target);
+        void setSender(const User sender);
 
         bool send();
 
     private:
         std::string m_message;
-        User *m_target;
+        User        *m_target;
+        User        m_sender;
 };

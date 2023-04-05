@@ -1,3 +1,8 @@
+#pragma once
+
+#include <list>
+#include "User.hpp"
+#include "Message.hpp"
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -38,4 +43,6 @@ class Server {
 		int _port;
 		int _max_connections;
 		int _max_body_size;
+		std::list<User> _users;
+		std::list<Message> _messages;
 };
